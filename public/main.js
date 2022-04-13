@@ -152,16 +152,16 @@ app.get('/app/flip', (req, res) => {
     res.status(200).json({ 'flip': coinFlip() })
 });
 
-app.get('/app/flips/:number', (req, res) => {
-    const flips = coinFlips(req.params.number)
+app.post('/app/flip/coins/', (req, res, next) => {
+    const flips = coinFlips(req.body.number)
     const count = countFlips(flips)
-    res.status(200).json({ "raw": flips, "summary": count })
-});
+    res.status(200).json({"raw":flips,"summary":count})
+})
 
-app.get('/app/flip/call/:guess(heads|tails)', (req, res) => {
-    const game = flipACoin(req.params.guess)
+app.post('/app/flip/call/', (req, res, next) => {
+    const game = flipACoin(req.body.guess)
     res.status(200).json(game)
-});
+})
 
 // Debug endpoints
 if (args.debug) {
@@ -187,4 +187,4 @@ process.on('SIGTERM', () => {
 
 
 // Serve static HTML files
-app.use(express.static('./index.html'))
+app.use(express.static('./public'));
