@@ -22,7 +22,49 @@ function flipImage() {
 }
 
 // Flip multiple coins and show coin images in table as well as summary results
+function flipImages() {
+    numberCoins = document.getElementById("numberCoins").value
 
+    fetch('http://localhost:5000/app/flip/coins/', {
+        body: JSON.stringify({
+            "number": numberCoins
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+        method: "post"
+    })
+        .then(function (response) {
+            return response.json()
+        })
+        .then(function (result) {
+            document.getElementById("summaryHeads").innerHTML = result.summary.heads
+            document.getElementById("summaryTails").innerHTML = result.summary.tails
+            var flipTable = document.getElementById("details");
+            
+            for (var i = 0; i < result.raw.length; i++) {
+                var row = document.createElement("tr");
+
+                var num = document.createElement("td");
+                
+                num.innerHTML = i + 1;
+                row.appendChild(num);
+
+                var res = document.createElement("td");
+                res.innerHTML = result.raw[i];
+                row.appendChild(res);
+
+                var thisImSpot = document.createElement("td");
+                var thisCoin = document.createElement("img");
+                thisCoin.setAttribute("src", "assets/img/" + result.raw[i] + ".png");
+                thisCoin.setAttribute("class", "smallcoin");
+                thisCoin.appendChild(thisCoin);
+                row.appendChild(thisImSpot);
+
+                flipTable.appendChild(row);
+            }
+        }) 
+}
 
 // Enter number and press button to activate coin flip series
 
