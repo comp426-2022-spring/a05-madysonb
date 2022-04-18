@@ -134,7 +134,7 @@ function flipACoin(call) {
 }
 
 // Response and Request
-app.get('/app/flip', (req, res) => {
+app.get('/app/flip/', (req, res) => {
     res.status(200).json({ 'flip': coinFlip() })
 });
 
