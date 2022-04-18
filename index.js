@@ -1,13 +1,15 @@
 // Place your server entry point code here
 // Dependencies
-const cors = require('cors') // Add cors dependency
-app.use(cors()) // Set up cors middleware on all endpoints
-
 const express = require('express')
 const app = express()
-const db = require("./services/database.js")
+
+const cors = require('cors') // Add cors dependency
+app.use(cors()) // Set up cors middleware on all endpoints
+const db = require("./src/services/database.js")
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json()) // Allow JSON body messages on all endpoints
+
+app.use(express.static('./public')) // Serve static HTML files
 
 const morgan = require('morgan')
 const fs = require('fs')
@@ -15,7 +17,7 @@ const fs = require('fs')
 const args = require("minimist")(process.argv.slice(2))
 
 
-const port = args.port || process.env.PORT || 5555
+const port = args.port || process.env.PORT || 5000
 
 // Start an app server
 const server = app.listen(port, () => {
@@ -76,7 +78,7 @@ app.get('/app/', (req, res) => {
     // Respond with status message "OK"
     res.statusMessage = 'OK';
     res.writeHead(res.statusCode, { 'Content-Type': 'text/plain' });
-    res.end(res.statusCode + ' ' + res.statusMessage)
+    res.end('{"message":"Your API works! ('+ res.statusCode +')"}')
 });
 
 // coin functions
@@ -169,6 +171,3 @@ process.on('SIGTERM', () => {
     })
 });
 
-
-// Serve static HTML files
-app.use(express.static('./public'));
