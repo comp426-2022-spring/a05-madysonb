@@ -43,33 +43,12 @@ if (args.help || args.h) {
 }
 
 // logging
+app.use(express.static('./public'))
+
 if (args.log == true) {
-    const accessLog = fs.createWriteStream('access.log', { flags: 'a' })
+    const accessLog = fs.createWriteStream('./data/log/access.log', { flags: 'a' })
     app.use(morgan('combined', { stream: accessLog }))
 }
-
-// Middleware
-app.use((req, res, next) => {
-
-    let logdata = {
-        remoteaddr: req.ip,
-        remoteuser: req.user,
-        time: Date.now(),
-        method: req.method,
-        url: req.url,
-        protocol: req.protocol,
-        httpversion: req.httpVersion,
-        status: res.statusCode,
-        referer: req.headers["referer"],
-        useragent: req.headers["user-agent"],
-    };
-
-    const stmt = db.prepare('INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, status, referer, useragent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
-    const info = stmt.run(logdata.remoteaddr, logdata.remoteuser, logdata.time, logdata.method, logdata.url, logdata.protocol, logdata.httpversion, logdata.status, logdata.referer, logdata.useragent)
-
-    next();
-});
-
 
 // Define default endpoint
 app.get('/app/', (req, res) => {
@@ -81,31 +60,12 @@ app.get('/app/', (req, res) => {
     res.end('{"message":"Your API works! ('+ res.statusCode +')"}')
 });
 
-// Response and Request
-app.get('/app/flip/', (req, res) => {
-    res.status(200).json({ 'flip': coinFlip() })
-});
-
-app.post('/app/flip/coins/', (req, res, next) => {
-    const flips = coinFlips(req.body.number)
-    const count = countFlips(flips)
-    res.status(200).json({"raw":flips,"summary":count})
-})
-
-app.post('/app/flip/call/', (req, res, next) => {
-    const game = flipACoin(req.body.guess)
-    res.status(200).json(game)
-})
+// bring in routes 
+app.use(require('./src/routes/someroutes.js'))
 
 // Debug endpoints
 if (args.debug) {
-    app.get('/app/log/access', (req, res) => {
-        const stmt = db.prepare("SELECT * FROM accesslog").all();
-        res.status(200).json(stmt);
-    });
-    app.get("/app/error", (req, res) => {
-        throw new Error("Error Test Successful.");
-    });
+    app.use(require('./src/routes/someMoreRoutes.js'))
 }
 
 // Default response for any other request
