@@ -13,3 +13,8 @@ img.bigcoin {
 img.smallcoin {
   width: 50px;
 }
+
+table, th, td {
+  border: 3px dashed black;
+  padding: 8px;
+}
