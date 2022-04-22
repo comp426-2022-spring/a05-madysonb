@@ -5,7 +5,7 @@ const app = express()
 
 const cors = require('cors') // Add cors dependency
 app.use(cors()) // Set up cors middleware on all endpoints
-const db = require("./src/services/database.js")
+const db = require('./src/services/database.js')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json()) // Allow JSON body messages on all endpoints
 
