@@ -34,12 +34,15 @@ function activeGuess() {
 }
 
 // Flip one coin and show coin image to match result when button clicked
+const coin = document.getElementById("coin");
+coin.addEventListener("click", flipImage);
 function flipImage() {
     fetch('http://localhost:5000/app/flip/')
         .then(function (response) {
             return response.json()
         })
         .then(function (result) {
+            
             document.getElementById("flipResult").innerHTML = result.flip;
             document.getElementById("quarter").setAttribute("src", "assets/img/" + result.flip + ".png")
         })

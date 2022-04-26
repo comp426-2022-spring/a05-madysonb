@@ -52,3 +52,9 @@ function flipACoin(call) {
 
 }
 
+module.exports = {
+    coinFlips: coinFlips,
+    flipACoin: flipACoin,
+    countFlips: countFlips,
+    coinFlip: coinFlip
+};

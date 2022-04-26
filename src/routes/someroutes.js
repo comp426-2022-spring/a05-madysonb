@@ -2,7 +2,7 @@
 
 const express = require("express");
 
-flipFuncs = require('../utils/utilities.js')
+const flipFuncs = require("../utils/utilities.js");
 
 const routesF = express.Router()
 

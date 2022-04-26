@@ -41,7 +41,7 @@
   </head>
   <body>
     <nav>
-      <button type="button" id="homenav">Home</button> <!-- added type= to buttons? -->
+      <button type="button" id="homenav">Home</button>
       <button type="button" id="singlenav">Flip one coin</button>
       <button type="button" id="multinav">Flip multiple coins</button>
       <button type="button" id="guessnav">Guess the result</button>
@@ -49,20 +49,20 @@
 
     <div id="home">
       <h1>Directions</h1>
-      <p>Click on one of the buttons to start a game.</p>
+      <p>Click on one of the buttons to start a game.</p> 
+      <!-- add game directions -->
     </div>
 
     <div id="single" class="hidden">
       <h1>Flip One Coin</h1>
-      <button type="button" id="coin" onclick="flipCoin()">Flip!</button> <!-- A reset button may be added later -->
+      <button id="coin">Flip!</button> 
       <br>
-      <p>Result: <span id="flipResult"></span></p>
-      <img src="assets/img/coin.png" id="quarter" class="bigcoin" alt="Coin
-        Image">
+      <p>Result: <span id="flipResult">?</span></p>
+      <img src="assets/img/coin.png" id="quarter" class="bigcoin" alt="Coin Image">
     </div>
 
 
-    <div id="multi" class="hidden">
+    <!-- <div id="multi" class="hidden">
       <h1>Flip Multiple Coins</h1>
 
       <form action="javascript:void(0);" method="post" onsubmit="flipCoins()">
@@ -107,8 +107,8 @@
         </table>
       </div>
 
-    </div>
-    <div id="guess" class="hidden">
+    </div> -->
+    <!-- <div id="guess" class="hidden">
 
       <h1>Guess the Result:</h1>
 
@@ -118,22 +118,15 @@
       <h2>Results: </h2>
 
       <h3>Your Pick: </h3>
-      <!-- Text of pick -->
       <p><span id="guessPickText"></span></p>
-      <!-- Image representation of pick -->
       <img src="assets/img/coin.png" id="guessPickImage" class="smallcoin"
         alt="coin image">
 
       <h3>Actual Result: </h3>
-      <!-- Text of actual result -->
       <p><span id="guessActualResultText"></span></p>
-      <!-- Image representation of pick -->
       <img src="assets/img/coin.png" id="guessActualResultImage"
         class="smallcoin" alt="coin image">
-
-      <!-- <h3>Did you win or lose?</h3>
-      <p><span id="guessWinOrLoss">Pick between heads or tails to see!</span></p> -->
-    </div>
+    </div> -->
 
     <script src="main.js"></script>
   </body>
