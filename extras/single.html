@@ -54,7 +54,7 @@
 
     <div id="single" class="active">
       <h1>Flip One Coin</h1>
-      <button type="button" id="coin" onclick="flipCoin()">Flip!</button> <!-- A reset button may be added later -->
+      <button type="button" id="flipTheCoin">Flip!</button>
       <br>
       <p>Result: <span id="flipResult"></span></p>
       <img src="assets/img/coin.png" id="quarter" class="bigcoin" alt="Coin
@@ -150,6 +150,10 @@
 
       document.getElementById("guessnav").onclick = function () {
         location.href = "guess.html";
+      };
+
+      document.getElementById("flipTheCoin").onclick = function () {
+        // call coinFlip? 
       };
       
     </script>
