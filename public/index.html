@@ -62,8 +62,6 @@
         <h3 style="display:inline-block; margin: 50px;">Guess the Result:</h3>
         <p style="display:inline-block;">Guess what the flip will be!</p>
       </div>
-      
-      
     </div>
 
     <div id="single" class="hidden">
@@ -76,52 +74,25 @@
 
 
     <div id="multi" class="hidden">
-      <h1>Flip Multiple Coins</h1>
-
-      <form id="numCoins">
-        <label for="numberCoins">Number of Flips: </label>
-        <input type="number" id="numberCoins" name="numberCoins">
-        <br>
-        <button type="submit" value="Flip Coins!">submit</button>
+      <h1>Flip many coins</h1>
+      <form id="coins">
+        <label for="number">
+          <strong>How many flips?</strong>
+        </label>
+        <input type="number" name="number" id="number" placeholder="ENTER NUMBER" />
+        <input onclick="multipleCoins(document.getElementById('number').value)" type="submit" value="Flip" />
       </form>
-<!-- 
-      <div id="resultTables" class="hidden">
-        <h2>Summary: </h2>
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Result</th>
-              <th scope="col">Number</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Heads</td>
-              <td><span id="summaryHeads"></span></td>
-            </tr>
-            <tr>
-              <td>Tails</td>
-              <td><span id="summaryTails"></span></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h2>Details:</h2>
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Number</th>
-              <th scope="col">Result</th>
-              <th scope="col">Image</th>
-            </tr>
-          </thead>
-          <tbody id="details">
-          </tbody>
-        </table>
-      </div> -->
-
+      <p>Result:</p>
+      <p>Heads:<span id="flipResultHead">?</span></p>
+      <p>Tails:<span id="flipResultTail">?</span></p>
+      <br>
+      <h2>All Flips</h2>
+      <div id="all_results"></div>
+      <div id="all_results_text"></div>
     </div>
-    <!-- <div id="guess" class="hidden">
+
+
+    <div id="guess" class="hidden">
 
       <h1>Guess the Result:</h1>
 
@@ -139,7 +110,9 @@
       <p><span id="guessActualResultText"></span></p>
       <img src="assets/img/coin.png" id="guessActualResultImage"
         class="smallcoin" alt="coin image">
-    </div> -->
+
+      <h3><span id="winorlose"></span></h3>
+    </div>
 
     <script src="main.js"></script>
   </body>

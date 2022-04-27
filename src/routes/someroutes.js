@@ -15,9 +15,16 @@ routesF.route('/app/flip/').get(function (req, res, next) {
 
 // multi flips
 routesF.route('/app/flips/coins/').post(function (req, res, next) {
-    const flip = flipFuncs.countFlips(flipFuncs.coinFlips(req.body.number))
+    
+    const raw = flipFuncs.coinFlips(req.body.number)
+    const summ = flipFuncs.countFlips(raw)
 
-    res.status(200).json(flip)
+    const rslt = {'raw': raw, 'summ': summ}
+    document.getElementById("summaryHeads").innerHTML = rslt.summ.heads
+    document.getElementById("summaryTails").innerHTML = rslt.summ.tails
+    
+    res.status(200).json({'raw': raw, 'summ': summ})
+    
 })
 
 // guess flip

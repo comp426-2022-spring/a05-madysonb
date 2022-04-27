@@ -37,7 +37,9 @@ function activeGuess() {
 const coin = document.getElementById("coin");
 coin.addEventListener("click", flipImage);
 function flipImage() {
-    fetch('http://localhost:5000/app/flip/')
+    const url = "http://localhost:5000/app/flip/"
+
+    fetch(url)
         .then(function (response) {
             return response.json()
         })
@@ -49,58 +51,45 @@ function flipImage() {
 }
 
 // Flip multiple coins and show coin images in table as well as summary results
-function flipImages() {
-    numberCoins = document.getElementById("numberCoins").value
+const coins = document.getElementById("coins");
+// coins.addEventListener("submit", multipleCoins);
+// const num = document.getElementById("number").value
 
+function multipleCoins(num) {
     fetch('http://localhost:5000/app/flip/coins/', {
         body: JSON.stringify({
-            "number": numberCoins
+            "number": num
         }),
         headers: {
             "Content-Type": "application/json",
         },
         method: "post"
     })
-        .then(function (response) {
-            return response.json()
-        })
-        .then(function (result) {
-            document.getElementById("summaryHeads").innerHTML = result.summary.heads
-            document.getElementById("summaryTails").innerHTML = result.summary.tails
-            var flipTable = document.getElementById("details");
-            
-            for (var i = 0; i < result.raw.length; i++) {
-                var row = document.createElement("tr");
+    .then(function (response) {
+        return response.json()
+    })
+    .then(function (result) {
+        document.getElementById("flipResultHead").innerHTML = result.summ.heads;
+        document.getElementById("flipResultTail").innerHTML = result.summ.tails;
 
-                var num = document.createElement("td");
-                
-                num.innerHTML = i + 1;
-                row.appendChild(num);
+        for (let i = 0; i < result.raw.length; i++) {
+            let img = document.createElement('img');
+            img.src = "./assets/img/" + result.raw[i] + ".png";
+            img.id = "smallcoin";
+            document_fragment.appendChild(img);
+            document.getElementById('all_results_text').innerHTML += `<p>${result.raw[i]}</p>`
+        }
 
-                var res = document.createElement("td");
-                res.innerHTML = result.raw[i];
-                row.appendChild(res);
+    })
 
-                var thisImSpot = document.createElement("td");
-                var thisCoin = document.createElement("img");
-                thisCoin.setAttribute("src", "assets/img/" + result.raw[i] + ".png");
-                thisCoin.setAttribute("class", "smallcoin");
-                thisCoin.appendChild(thisCoin);
-                row.appendChild(thisImSpot);
-
-                flipTable.appendChild(row);
-            }
-        }) 
-
-        document.getElementById("resultTables").setAttribute("class", "active");
 }
+
 
 // Enter number and press button to activate coin flip series
 
 
 // Guess a flip by clicking either heads or tails button
 function guessFlip(guess) {
-    console.log(guess);
     fetch('http://localhost:5000/app/flip/call/', {
         body: JSON.stringify({
             "guess": guess
@@ -120,6 +109,6 @@ function guessFlip(guess) {
             document.getElementById("guessActualResultText").innerHTML = result.flip;
             document.getElementById("guessActualResultImage").setAttribute("src", "assets/img/" + result.flip + ".png");
 
-            document.getElementById("guessWinOrLoss").innerHTML = "You " + result.result + ".";
+            document.getElementById("winorlose").innerHTML = "You " + result.result;
         })
 }
