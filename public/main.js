@@ -51,12 +51,15 @@ function flipImage() {
 }
 
 // Flip multiple coins and show coin images in table as well as summary results
-const coins = document.getElementById("coins");
-// coins.addEventListener("submit", multipleCoins);
-// const num = document.getElementById("number").value
 
-function multipleCoins(num) {
-    fetch('http://localhost:5000/app/flip/coins/', {
+
+const sub = document.getElementById("multiSubmit")
+sub.addEventListener("click", multipleCoins)
+
+function multipleCoins() {
+    const num = document.querySelector('#number').value
+
+    fetch('http://localhost:5000/app/flips/coins/', {
         body: JSON.stringify({
             "number": num
         }),
@@ -69,16 +72,23 @@ function multipleCoins(num) {
         return response.json()
     })
     .then(function (result) {
+        
         document.getElementById("flipResultHead").innerHTML = result.summ.heads;
         document.getElementById("flipResultTail").innerHTML = result.summ.tails;
 
+        // document.getElementById('all_results').innerHTML = `<p>${result.raw}</p>`
+        let all_res = ""
+        document.getElementById('all_results').innerHTML = ""
         for (let i = 0; i < result.raw.length; i++) {
             let img = document.createElement('img');
             img.src = "./assets/img/" + result.raw[i] + ".png";
-            img.id = "smallcoin";
-            document_fragment.appendChild(img);
-            document.getElementById('all_results_text').innerHTML += `<p>${result.raw[i]}</p>`
+            img.class = "smallestcoin";
+            img.style = "width: 80px"
+            document.getElementById('all_results').appendChild(img);
+            all_res += " " + result.raw[i]
+            
         }
+        document.getElementById('all_results_text').innerHTML = all_res
 
     })
 

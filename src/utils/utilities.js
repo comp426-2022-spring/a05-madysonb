@@ -6,6 +6,7 @@ function coinFlip() {
 }
 
 function coinFlips(flips) {
+    flips = Number(flips)
     let results = []
     let f = 0
     while (f < flips) {

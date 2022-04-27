@@ -51,15 +51,15 @@
       <h1>Directions</h1>
       <h2>Click on one of the buttons to start a game.</h2> 
       <div>
-        <h3 style="display:inline-block; margin: 50px; padding: 0px;">Flip One Coin:</h3>
+        <h3 style="display:inline-block; margin-left: 50px; padding: 0px;">Flip One Coin:</h3>
         <p style="display:inline-block;">Flip a coin!</p>
       </div>
       <div>
-        <h3 style="display:inline-block; margin: 50px;">Flip Multiple Coins:</h3>
+        <h3 style="display:inline-block; margin-left: 50px;">Flip Multiple Coins:</h3>
       <p style="display:inline-block;">Flip a number of coins based on an input value!</p>
       </div>
       <div>
-        <h3 style="display:inline-block; margin: 50px;">Guess the Result:</h3>
+        <h3 style="display:inline-block; margin-left: 50px;">Guess the Result:</h3>
         <p style="display:inline-block;">Guess what the flip will be!</p>
       </div>
     </div>
@@ -75,20 +75,16 @@
 
     <div id="multi" class="hidden">
       <h1>Flip many coins</h1>
-      <form id="coins">
-        <label for="number">
-          <strong>How many flips?</strong>
-        </label>
-        <input type="number" name="number" id="number" placeholder="ENTER NUMBER" />
-        <input onclick="multipleCoins(document.getElementById('number').value)" type="submit" value="Flip" />
-      </form>
+      <input type="number" id="number" placeholder="Number of Flips" />
+      <button type="button" id="multiSubmit">Flip!</button>
+       
       <p>Result:</p>
       <p>Heads:<span id="flipResultHead">?</span></p>
       <p>Tails:<span id="flipResultTail">?</span></p>
       <br>
-      <h2>All Flips</h2>
-      <div id="all_results"></div>
-      <div id="all_results_text"></div>
+      <h2>All Flips: </h2>
+      <p>List: </p><div id="all_results_text"></div>
+      <p>Visual: </p><div style="width: 10px" id="all_results"></div>
     </div>
 
 

@@ -15,15 +15,15 @@ routesF.route('/app/flip/').get(function (req, res, next) {
 
 // multi flips
 routesF.route('/app/flips/coins/').post(function (req, res, next) {
-    
-    const raw = flipFuncs.coinFlips(req.body.number)
-    const summ = flipFuncs.countFlips(raw)
+    try {
+        const raw = flipFuncs.coinFlips(req.body.number)
+        const summ = flipFuncs.countFlips(raw)
 
-    const rslt = {'raw': raw, 'summ': summ}
-    document.getElementById("summaryHeads").innerHTML = rslt.summ.heads
-    document.getElementById("summaryTails").innerHTML = rslt.summ.tails
+        res.status(200).json({'raw': raw, 'summ': summ})
+    } catch {
+        res.status(404).json({'raw': 'error', 'summ': 'error'})
+    }
     
-    res.status(200).json({'raw': raw, 'summ': summ})
     
 })
 
