@@ -13,6 +13,10 @@ routesF.route('/app/flip/').get(function (req, res, next) {
 
 })
 
+routesF.route('/app/flip/coin/').get(function (req, res) {
+    res.status(200).json({ 'flip': flipFuncs.coinFlip() })
+});
+
 // multi flips
 routesF.route('/app/flips/coins/').post(function (req, res, next) {
     try {
