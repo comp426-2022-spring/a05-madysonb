@@ -43,7 +43,7 @@ routesF.route('/app/flip/call/').post(function (req, res, next) {
     res.status(200).json(flip)
 })
 
-routesF.route('/app/flip/call/:guess(heads|tails)').get(function (req, res) {
+routesF.route('/app/flip/call/:guess/').get(function (req, res) {
     const game = flipFuncs.flipACoin(req.params.guess)
     res.status(200).json(game)
 })
