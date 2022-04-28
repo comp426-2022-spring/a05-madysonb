@@ -18,7 +18,7 @@ routesF.route('/app/flip/coin/').get(function (req, res) {
 });
 
 // multi flips
-routesF.route('/app/flips/coins/').post(function (req, res, next) {
+routesF.route('/app/flip/coins/').post(function (req, res, next) {
     try {
         const raw = flipFuncs.coinFlips(req.body.number)
         const summ = flipFuncs.countFlips(raw)

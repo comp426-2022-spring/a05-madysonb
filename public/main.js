@@ -59,7 +59,7 @@ sub.addEventListener("click", multipleCoins)
 function multipleCoins() {
     const num = document.querySelector('#number').value
 
-    fetch('http://localhost:5000/app/flips/coins/', {
+    fetch('http://localhost:5000/app/flip/coins/', {
         body: JSON.stringify({
             "number": num
         }),
