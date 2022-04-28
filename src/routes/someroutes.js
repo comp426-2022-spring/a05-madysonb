@@ -3,6 +3,7 @@
 const express = require("express");
 
 const flipFuncs = require("../utils/utilities.js");
+const db = require('../services/database.js');
 
 const routesF = express.Router()
 
@@ -47,5 +48,20 @@ routesF.route('/app/flip/call/:guess/').get(function (req, res) {
     const game = flipFuncs.flipACoin(req.params.guess)
     res.status(200).json(game)
 })
+
+routesF.route('/app/log/access').get(function (req, res, next) {
+    try {
+        const stmt = db.prepare("SELECT * FROM accesslog").all()
+        res.status(200).json(stmt)
+    } catch {
+        console.error(res)
+    }
+    
+});
+
+routesF.route('/app/error/').get(function (req, res, next) {
+    throw new Error("Error Test Successful.");
+});
+
 
 module.exports = routesF
